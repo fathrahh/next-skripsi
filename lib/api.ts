@@ -1,4 +1,4 @@
-import { ModelFeatures } from "../components/FeaturesForm";
+import { ModelFeatures } from "../app/components/FeaturesForm";
 
 export default async function requestPrediction(
   features: ModelFeatures

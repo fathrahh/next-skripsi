@@ -1,10 +1,10 @@
 "use client";
 
-import { Button, Input, Option, Select } from "@material-tailwind/react";
+import { Button, Input, Option, Select } from "./../../lib/mui-tailwind";
 import { FormEvent, useState } from "react";
 
-import { features } from "./../const";
-import requestPrediction from "../lib/api";
+import { features } from "../../const";
+import requestPrediction from "../../lib/api";
 
 export type ModelFeatures = {
   age: number;

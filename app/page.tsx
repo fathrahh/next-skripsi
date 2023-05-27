@@ -1,8 +1,8 @@
-import { Card } from "@material-tailwind/react";
+import { Card } from "./../lib/mui-tailwind";
 import { TiWarning } from "react-icons/ti";
 
-import FeaturesForm from "@/components/FeaturesForm";
-import Navbar from "@/components/Navbar";
+import FeaturesForm from "@/app/components/FeaturesForm";
+import Navbar from "@/app/components/Navbar";
 
 export default function Home() {
   return (

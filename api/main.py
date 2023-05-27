@@ -28,7 +28,7 @@ def hello_world():
 def predict(payload: Features) -> int:
     payload = payload.dict()
 
-    with open('./model.pkl', 'rb') as f:
+    with open('model.pkl', 'rb') as f:
         model = pickle.load(f)
 
     X_dict = {
