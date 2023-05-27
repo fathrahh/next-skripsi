@@ -7,7 +7,7 @@ export default function Navbar() {
         width={48}
         height={48}
         className="w-12 h-12"
-        src="/logo_upnvj.png  "
+        src="/logo_upnvj.png"
         alt="logo-upn"
       />
       {/* <ul className="flex gap-2 ml-6">
