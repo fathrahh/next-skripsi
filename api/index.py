@@ -1,7 +1,8 @@
+import os
 import pickle
 import numpy as np
-from fastapi import FastAPI
 
+from fastapi import FastAPI
 from api.request.models import Features
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -25,27 +26,29 @@ def hello_world():
 
 
 @app.post("/api/predict")
-def predict(payload: Features):
+def predict(payload: Features) -> int:
     payload = payload.dict()
 
-    return payload
-    # with open('model.pkl', 'rb') as f:
-    #     model = pickle.load(f)
+    __location__ = os.path.realpath(
+        os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-    # X_dict = {
-    #     'gender': payload['gender'],
-    #     'age': payload['age'],
-    #     'hypertension': payload['hypertension'],
-    #     'heart_disease': payload['heartDisease'],
-    #     'ever_married': payload['everMarried'],
-    #     'work_type': payload['workType'],
-    #     'residence_type': payload['residentType'],
-    #     'avg_glucose_level': payload['avgGlucoseLevel'],
-    #     'bmi': payload['bmi'],
-    #     'smoking_status': payload['smokingStatus']
-    # }
+    with open(os.path.join(__location__, 'model.pkl'), 'rb') as f:
+        model = pickle.load(f)
 
-    # X_test = np.array(list(X_dict.values()))
-    # y_pred = model.predict(X_test.reshape(-1, len(X_test)))
+    X_dict = {
+        'gender': payload['gender'],
+        'age': payload['age'],
+        'hypertension': payload['hypertension'],
+        'heart_disease': payload['heartDisease'],
+        'ever_married': payload['everMarried'],
+        'work_type': payload['workType'],
+        'residence_type': payload['residentType'],
+        'avg_glucose_level': payload['avgGlucoseLevel'],
+        'bmi': payload['bmi'],
+        'smoking_status': payload['smokingStatus']
+    }
 
-    # return y_pred
+    X_test = np.array(list(X_dict.values()))
+    y_pred = model.predict(X_test.reshape(-1, len(X_test)))
+
+    return y_pred
