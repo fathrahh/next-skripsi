@@ -24,10 +24,7 @@ app.add_middleware(
 
 @app.get("/api/hello")
 def hello_world():
-    with open(join('model', 'model.pkl'), 'rb') as f:
-        model = pickle.load(f)
-
-    return model
+    return fileDir
 
 
 @app.post("/api/predict")
