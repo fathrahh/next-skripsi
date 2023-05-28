@@ -24,7 +24,10 @@ app.add_middleware(
 
 @app.get("/api/hello")
 def hello_world():
-    return {"message": "Hello World"}
+    with open(join('model', 'model.pkl'), 'rb') as f:
+        model = pickle.load(f)
+
+    return model
 
 
 @app.post("/api/predict")
