@@ -28,7 +28,11 @@ app.add_middleware(
 
 @app.get("/api/hello")
 def hello_world():
+    url = os.environ.get("supa_url")
+    key = os.environ.get("supa_key")
     return {
+        "key": key,
+        'url': url,
         'cwd': os.getcwd(),
         'fd': fileDir,
     }
