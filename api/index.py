@@ -1,4 +1,5 @@
 import numpy as np
+import requests
 import os
 
 from joblib import load
@@ -6,6 +7,8 @@ from os.path import dirname, abspath
 from fastapi import FastAPI
 from api.request.models import Features
 from fastapi.middleware.cors import CORSMiddleware
+from supabase import create_client
+from io import BytesIO
 
 app = FastAPI()
 
@@ -38,7 +41,16 @@ def predict(payload: Features) -> int:
     # __location__ = os.path.realpath(
     #     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-    model = load(os.path.join(dirname, 'model.pkl'))
+    url = os.environ.get("supa_url")
+    key = os.environ.get("supa_key")
+
+    supabase = create_client(url, key)
+    url_joblib = supabase.storage.from_('model').get_public_url("model.joblib")
+
+    response = requests.get(url_joblib)
+    file_content = response.content
+
+    model = load(BytesIO(file_content))
 
     X_dict = {
         'gender': payload['gender'],
