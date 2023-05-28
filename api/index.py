@@ -34,7 +34,7 @@ def predict(payload: Features) -> int:
     # __location__ = os.path.realpath(
     #     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-    with open(join('model', 'model.pkl'), 'rb') as f:
+    with open(join(fileDir, 'model.pkl'), 'rb') as f:
         model = pickle.load(f)
 
     X_dict = {
