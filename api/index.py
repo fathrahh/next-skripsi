@@ -1,12 +1,14 @@
-import os
 import pickle
 import numpy as np
 
+from os.path import dirname, abspath, join
 from fastapi import FastAPI
 from api.request.models import Features
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+fileDir = dirname(abspath(__file__))
 
 origins = [
     "http://localhost:3000",
@@ -29,10 +31,10 @@ def hello_world():
 def predict(payload: Features) -> int:
     payload = payload.dict()
 
-    __location__ = os.path.realpath(
-        os.path.join(os.getcwd(), os.path.dirname(__file__)))
+    # __location__ = os.path.realpath(
+    #     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-    with open(os.path.join(__location__, 'model.pkl'), 'rb') as f:
+    with open(join(fileDir, '..', 'model', 'model.pkl'), 'rb') as f:
         model = pickle.load(f)
 
     X_dict = {
