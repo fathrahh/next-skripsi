@@ -5,10 +5,24 @@ import os
 from joblib import load
 from os.path import dirname, abspath
 from fastapi import FastAPI
-from api.request.models import Features
 from fastapi.middleware.cors import CORSMiddleware
 from supabase import create_client
 from io import BytesIO
+from pydantic import BaseModel
+
+
+class Features(BaseModel):
+    age: int
+    avgGlucoseLevel: float
+    bmi: float
+    everMarried: int
+    gender: int
+    heartDisease: int
+    hypertension: int
+    residentType: int
+    workType: int
+    smokingStatus: int
+
 
 app = FastAPI()
 
