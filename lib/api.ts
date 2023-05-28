@@ -1,8 +1,12 @@
 import { ModelFeatures } from "../app/components/FeaturesForm";
 
+type Response = {
+  predict: string;
+};
+
 export default async function requestPrediction(
   features: ModelFeatures
-): Promise<number> {
+): Promise<Response> {
   const response = await fetch("/api/predict", {
     method: "POST",
     body: JSON.stringify(features),
@@ -11,7 +15,7 @@ export default async function requestPrediction(
     },
   });
 
-  const data = (await response.json()) as number;
+  const data = (await response.json()) as Response;
 
   return data;
 }

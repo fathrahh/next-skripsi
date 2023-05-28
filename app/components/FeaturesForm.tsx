@@ -53,7 +53,7 @@ export default function FeaturesForm() {
 
     const response = await requestPrediction(modelFeatures);
 
-    alert(`Stroke : ${response}`);
+    alert(`Stroke : ${response.predict}`);
   };
 
   return (
