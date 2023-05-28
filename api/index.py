@@ -1,6 +1,8 @@
 import pickle
 import numpy as np
+import os
 
+from joblib import load
 from os.path import dirname, abspath, join
 from fastapi import FastAPI
 from api.request.models import Features
@@ -24,7 +26,10 @@ app.add_middleware(
 
 @app.get("/api/hello")
 def hello_world():
-    return fileDir
+    return {
+        'cwd': os.getcwd(),
+        'fd': fileDir,
+    }
 
 
 @app.post("/api/predict")
@@ -34,8 +39,7 @@ def predict(payload: Features) -> int:
     # __location__ = os.path.realpath(
     #     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-    with open(join(fileDir, 'model.pkl'), 'rb') as f:
-        model = pickle.load(f)
+    model = load('./model.joblib')
 
     X_dict = {
         'gender': payload['gender'],

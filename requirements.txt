@@ -1,4 +1,4 @@
 fastapi==0.95.2
 numpy==1.24.3
-pickles==0.1.1
+joblib==1.2.0
 uvicorn[standard]
