@@ -1,9 +1,8 @@
-import pickle
 import numpy as np
 import os
 
 from joblib import load
-from os.path import dirname, abspath, join
+from os.path import dirname, abspath
 from fastapi import FastAPI
 from api.request.models import Features
 from fastapi.middleware.cors import CORSMiddleware
@@ -39,7 +38,7 @@ def predict(payload: Features) -> int:
     # __location__ = os.path.realpath(
     #     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-    model = load('./model.joblib')
+    model = load(os.path.join(dirname, 'model.pkl'))
 
     X_dict = {
         'gender': payload['gender'],
