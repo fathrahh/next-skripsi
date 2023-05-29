@@ -58,7 +58,7 @@ export default function FeaturesForm() {
 
   return (
     <form onSubmit={onSubmitForm}>
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid lg:grid-cols-2 grid-cols-1 gap-6">
         <Input
           required
           name="age"
