@@ -8,7 +8,7 @@ import {
 
 interface Props {
   open: boolean;
-  handlerOpen: () => void;
+  handlerOpen: (state: boolean) => void;
   predict: string;
 }
 
